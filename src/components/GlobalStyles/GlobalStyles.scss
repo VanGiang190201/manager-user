@@ -1,11 +1,16 @@
 @import 'normalize.css';
 :root {
     --text-color: #000;
+    --default-layout-width: 1200px;
+    --default-layout-horizontal-spacer: 24px;
+    --default-layout-header-height: 80px;
+    --default-layout-sidebar-width: 280px;
 }
 html {
     font-size: 62.5%;
 }
 * {
+    box-sizing: border-box;
     padding: 0;
     margin: 0;
 }
