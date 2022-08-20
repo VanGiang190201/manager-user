@@ -7,10 +7,40 @@
 }
 .inner {
     width: var(--default-layout-width);
-    padding: 0 var(--default-layout-horizontal-spacer);
     height: 100%;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    background-color: #f39c12;
+}
+//action
+.actions {
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+}
+.email-icon {
+    position: relative;
+    background-color: #3498db;
+    font-size: 3.2rem;
+    color: var(--while-color);
+    border: none;
+    cursor: pointer;
+    &::after {
+        content: '';
+        position: absolute;
+        top: 2px;
+        right: -10px;
+        height: 32px;
+        width: 1px;
+        background-color: #333;
+    }
+}
+
+.user-avatar {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-left: 14px;
+    cursor: pointer;
 }

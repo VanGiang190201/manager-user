@@ -1,0 +1,27 @@
+.search {
+    width: 240px;
+    height: 32px;
+    display: flex;
+    border-bottom: 1px solid #ccc;
+    input {
+        font-size: 1.6rem;
+        line-height: 31px;
+        height: 100%;
+        width: 100%;
+        border: none;
+        outline: none;
+        background-color: #3498db;
+        caret-color: var(--while-color);
+        color: var(--while-color);
+    }
+    input:not(:placeholder-shown) ~ .search-btn {
+        color: rgba(22, 24, 35, 0.75);
+    }
+}
+.search-btn {
+    background-color: #3498db;
+    border: none;
+    color: #fff;
+    padding: 2px;
+    cursor: pointer;
+}
