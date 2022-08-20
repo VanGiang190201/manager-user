@@ -1,5 +1,6 @@
 @import 'normalize.css';
 :root {
+    --primary-color: #fe2c65;
     --while-color: #fff;
     --text-color: #000;
     --default-layout-width: 1200px;
@@ -21,4 +22,5 @@ body {
     font-family: 'Times New Roman', Times, serif;
     line-height: 1.5;
     text-rendering: optimizeSpeed;
+    overflow-y: overlay;
 }

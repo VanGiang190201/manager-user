@@ -1,5 +1,5 @@
 .search {
-    width: 240px;
+    width: 280px;
     height: 32px;
     display: flex;
     border-bottom: 1px solid #ccc;
@@ -22,6 +22,9 @@
     background-color: #3498db;
     border: none;
     color: #fff;
-    padding: 2px;
+    padding: 4px;
     cursor: pointer;
+    &:hover {
+        color: var(--primary-color);
+    }
 }

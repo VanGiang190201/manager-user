@@ -1,12 +1,13 @@
 import HumanManger from '~/pages/HumanManager';
 import DepartmentManger from '~/pages/DepartmentManager';
+import config from '~/config';
 const publicRoutes = [
     {
-        path: '/',
+        path: config.routes.humanManager,
         component: HumanManger,
     },
     {
-        path: '/department',
+        path: config.routes.departmentManager,
         component: DepartmentManger,
     },
 ];

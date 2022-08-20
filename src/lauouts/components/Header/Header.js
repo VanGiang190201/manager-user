@@ -7,6 +7,7 @@ import { faEnvelope } from '@fortawesome/free-regular-svg-icons';
 import Search from '~/lauouts/components/Search';
 import styles from './Header.module.scss';
 import Image from '~/components/Images';
+import Buttons from '~/components/Buttons';
 
 const cx = classNames.bind(styles);
 function Header() {
@@ -37,6 +38,8 @@ function Header() {
                     ) : (
                         <></>
                     )}
+
+                    <Buttons primary>Upgrade</Buttons>
                 </div>
             </div>
         </header>
