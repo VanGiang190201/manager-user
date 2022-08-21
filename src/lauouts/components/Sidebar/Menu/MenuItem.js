@@ -11,6 +11,7 @@ function MenuItem({ to, icon, title, activeIcon }) {
             <span className={cx('icon')}>{icon}</span>
             <span className={cx('active-icon')}>{activeIcon}</span>
             <span className={cx('title')}>{title}</span>
+            <div className={cx('circle')}> </div>
         </NavLink>
     );
 }

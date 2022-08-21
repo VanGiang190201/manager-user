@@ -1,4 +1,5 @@
 .menu-item {
+    position: relative;
     display: flex;
     text-decoration: none;
     background-color: #2c3e50;
@@ -11,6 +12,7 @@
     &:hover {
         background-color: #34495e;
     }
+
     &.active {
         color: var(--primary-color);
         .icon {
@@ -19,9 +21,21 @@
         .active-icon {
             display: flex;
         }
+        .circle {
+            display: block;
+        }
     }
 }
-
+.circle {
+    position: absolute;
+    top: 0;
+    right: -24px;
+    background-color: var(--while-color);
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    display: none;
+}
 .title {
     display: flex;
     align-items: center;
