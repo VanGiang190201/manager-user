@@ -1,9 +1,77 @@
 .user-item {
     text-align: center;
-    height: 40px;
-    line-height: 32px;
-    td {
-        font-size: 16px;
-        border-bottom: 1px solid #ccc;
+    min-height: 200px;
+    min-width: 200px;
+    background-color: #ccc;
+    padding: 0 8px;
+    cursor: pointer;
+    margin: 12px 0;
+    box-shadow: 0 0 2px #000, 0 0 6px #333;
+    &:hover {
+        background-color: rgb(104, 104, 230);
+    }
+    &:hover .avatar {
+        animation: rotateImage 1s linear;
+    }
+}
+
+.avatar {
+    margin: 10px auto 10px;
+    width: 148px;
+    height: 148px;
+    box-sizing: border-box;
+    overflow: hidden;
+    border-radius: 50%;
+    box-shadow: 0 0 4px #000, 0 0 8px blue, 0 0 16px darkblue;
+}
+
+.avatar-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.information {
+    padding: 8px;
+}
+
+.name {
+    color: #000;
+    line-height: 2.5rem;
+    padding: 8px 0;
+    border-bottom: 2px solid #000;
+}
+
+.position {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    font-size: 2rem;
+    line-height: 2.5rem;
+    padding: 8px 0;
+}
+
+.phone {
+    font-size: 1.8rem;
+    line-height: 2.5rem;
+    padding: 4px 0;
+}
+
+.address {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.8rem;
+    line-height: 2.5rem;
+    padding: 4px 0;
+}
+
+@keyframes rotateImage {
+    0% {
+        transform: rotateY(0);
+    }
+    100% {
+        transform: rotateY(360deg);
     }
 }

@@ -1,7 +1,9 @@
-.user-list {
+.wrapper {
     width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
 
-    border-collapse: collapse;
     .header {
         height: 48px;
         background-color: #ccc;
