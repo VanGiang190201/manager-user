@@ -1,11 +1,19 @@
-.wrapper {
+.body {
     width: 100%;
     display: flex;
     flex-wrap: wrap;
     justify-content: space-around;
-
-    .header {
-        height: 48px;
-        background-color: #ccc;
-    }
+}
+.header {
+    width: 100%;
+    height: 48px;
+    background-color: #ccc;
+    display: flex;
+    align-items: center;
+}
+.add-btn {
+    margin-right: 10px;
+}
+.icon-plus {
+    margin-left: 4px;
 }

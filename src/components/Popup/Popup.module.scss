@@ -1,0 +1,13 @@
+.wrapper {
+    position: fixed;
+    top: calc(var(--default-layout-header-height) + 12%);
+    right: 20%;
+    z-index: 3;
+    height: 400px;
+    width: 600px;
+    background-color: #ccc;
+    display: none;
+}
+// .popup {
+//     display: block;
+// }

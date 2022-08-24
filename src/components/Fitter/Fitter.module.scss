@@ -1,0 +1,20 @@
+.wrapper {
+    width: 100%;
+    display: flex;
+    justify-items: flex-start;
+    select {
+        margin-left: 20px;
+        border: none;
+        outline: none;
+        font-size: 1.2rem;
+        font-weight: 600;
+        font-style: italic;
+        width: 140px;
+    }
+}
+.label {
+    margin-left: 20px;
+    font-size: 1.8rem;
+    font-weight: 600;
+    line-height: 2.5rem;
+}
