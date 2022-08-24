@@ -39,7 +39,9 @@ function Header() {
                         <></>
                     )}
 
-                    <Buttons primary>Upgrade</Buttons>
+                    <Buttons primary className={cx('upgrade-btn')}>
+                        Upgrade
+                    </Buttons>
                 </div>
             </div>
         </header>

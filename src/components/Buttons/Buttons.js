@@ -14,6 +14,7 @@ function Buttons({
     disabled = false,
     large = false,
     small = false,
+    className,
     onClick,
     ...passProps
 }) {
@@ -31,6 +32,7 @@ function Buttons({
     }
 
     const classes = cx('wrapper', {
+        [className]: className,
         primary,
         outline,
         large,
@@ -53,6 +55,7 @@ Buttons.propTypes = {
     disabled: PropTypes.bool,
     large: PropTypes.bool,
     small: PropTypes.bool,
+    className: PropTypes.string,
     onClick: PropTypes.func,
 };
 export default Buttons;
