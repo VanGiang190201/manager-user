@@ -1,13 +1,13 @@
 .wrapper {
     position: fixed;
-    top: calc(var(--default-layout-header-height) + 12%);
-    right: 20%;
+    top: 50%;
+    left: 50%;
     z-index: 3;
     height: 400px;
     width: 600px;
     background-color: #ccc;
+    border-radius: 12px;
     display: none;
+    transform: translate(-50%, -50%);
+    box-shadow: 0 0 10px blue, 0 0 20px darkblue;
 }
-// .popup {
-//     display: block;
-// }
