@@ -8,9 +8,10 @@ import { HomeIcon, UserGroupIcon } from '~/components/Icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPenToSquare, faTrashCan } from '@fortawesome/free-regular-svg-icons';
 const cx = classNames.bind(styles);
-function UsersItem() {
+function UsersItem({ isAdd = false }) {
     const [renderUsers, setRenderUsers] = useState([]);
     const [dataChange, setDataChange] = useState(false);
+
     const handleDelete = (id) => {
         const options = {
             method: 'DELETE',
@@ -21,7 +22,7 @@ function UsersItem() {
         };
         fetch(`http://localhost:3000/users/${id}`, options)
             .then((response) => response.json())
-            .then((data) => {
+            .then(() => {
                 setDataChange(!dataChange);
             });
     };
@@ -34,6 +35,9 @@ function UsersItem() {
             });
     }, [dataChange]);
 
+    useEffect(() => {
+        setDataChange(isAdd);
+    }, [isAdd]);
     return (
         <>
             {renderUsers.map((user) => {
