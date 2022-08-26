@@ -72,6 +72,7 @@ function HumanManger() {
             .then((response) => response.json())
             .then(() => {
                 setIsAdd(!isAdd);
+                handleClosePopup();
             });
     };
     return (
