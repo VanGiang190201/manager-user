@@ -32,7 +32,7 @@ function HumanManger() {
     };
 
     const handleDisplayImage = () => {
-        const preview = document.querySelector('#avatar');
+        const preview = document.querySelector('#display-avatar');
         const image = document.querySelector('input[type="file').files[0];
         const reader = new FileReader();
         reader.addEventListener(
@@ -50,15 +50,12 @@ function HumanManger() {
 
     const handleAddUser = () => {
         const information = document.querySelectorAll('input[type="text"]');
-        const avatar = document.querySelector('input[type="file').files[0];
-        let user = {
-            name: information[0].value,
-            age: information[1].value,
-            avatar: `images/${avatar.name}`,
-            address: information[2].value,
-            department: information[3].value,
-            phone: information[4].value,
-        };
+        const avatar = document.querySelector('input[type="file');
+        let user = Array.from(information).reduce((values, input) => {
+            values[input.id] = input.value;
+            values[avatar.id] = `images/${avatar.files[0].name}`;
+            return values;
+        }, {});
 
         var option = {
             method: 'POST',
@@ -93,10 +90,11 @@ function HumanManger() {
                     <div className={cx('add-popup')}>
                         <div className={cx('avatar-user')}>
                             <div className={cx('avatar')}>
-                                <img className={cx('image')} src="" alt="" id="avatar" />
+                                <img className={cx('image')} src="" alt="" id="display-avatar" />
                             </div>
                             <input
                                 type="file"
+                                id="avatar"
                                 className={cx('upload-avatars')}
                                 accept="image/png , image/jpeg"
                                 onChange={handleDisplayImage}
@@ -109,8 +107,8 @@ function HumanManger() {
                             <input type="text" className={cx('upload-age')} id="age" spellCheck={false} />
                             <label htmlFor="address">Address User</label>
                             <input type="text" className={cx('upload-address')} id="address" spellCheck={false} />
-                            <label htmlFor="position">Position User</label>
-                            <input type="text" className={cx('upload-position')} id="position" spellCheck={false} />
+                            <label htmlFor="department">Position User</label>
+                            <input type="text" className={cx('upload-position')} id="department" spellCheck={false} />
                             <label htmlFor="phone">Number Phone User</label>
                             <input type="text" className={cx('upload-phone')} id="phone" spellCheck={false} />
                         </div>

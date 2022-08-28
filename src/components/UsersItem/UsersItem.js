@@ -19,6 +19,7 @@ const initState = false;
 //Actions
 const ADD_ACTION = 'add';
 const DELETE_ACTION = 'delete';
+const UPDATE_ACTION = 'update';
 
 //Reducer
 const reducer = (state, action) => {
@@ -28,6 +29,8 @@ const reducer = (state, action) => {
             return !state;
         case DELETE_ACTION:
             return !state;
+        case UPDATE_ACTION:
+            return !state;
         default:
             throw new Error(`Invalid action`);
     }
@@ -35,6 +38,7 @@ const reducer = (state, action) => {
 
 function UsersItem({ isAdd = false }) {
     const popupRef = useRef();
+    const userAvatar = useRef();
     const [renderUsers, setRenderUsers] = useState([]);
     const [userUpdates, setUserUpdates] = useState([]);
     const [dataChange, dispatch] = useReducer(reducer, initState);
@@ -64,7 +68,24 @@ function UsersItem({ isAdd = false }) {
                 dispatch(DELETE_ACTION);
             });
     };
+
     //Update user in the list user
+    const handleDisplayImage = () => {
+        const preview = document.querySelector('#display-avatar');
+        const image = document.querySelector('input[type="file"]').files[0];
+        const reader = new FileReader();
+        reader.addEventListener(
+            'load',
+            () => {
+                // convert image file to base64 string
+                preview.src = reader.result;
+            },
+            false,
+        );
+        if (image) {
+            reader.readAsDataURL(image);
+        }
+    };
     const handleShowPopupUpdate = (id) => {
         const popupElement = popupRef.current;
         const cover = document.querySelector('#cover');
@@ -76,6 +97,31 @@ function UsersItem({ isAdd = false }) {
 
         const userSelect = renderUsers.filter((user) => user.id === id);
         setUserUpdates(userSelect);
+        userAvatar.current = userSelect[0].avatar;
+    };
+
+    const handleUpdateUser = (id) => {
+        const information = document.querySelectorAll('input[type="text"]');
+        const avatar = document.querySelector('input[type="file"]');
+        let user = Array.from(information).reduce((values, input) => {
+            values[input.id] = input.value;
+            values[avatar.id] = userAvatar.current;
+            return values;
+        }, {});
+
+        var option = {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json',
+                // 'Content-Type': 'application/x-www-form-urlencoded',
+            },
+            body: JSON.stringify(user),
+        };
+
+        fetch(`http://localhost:3000/users/${id}`, option)
+            .then((response) => response.json())
+            .then(() => dispatch(UPDATE_ACTION))
+            .catch((error) => console.log(error));
     };
     const handleClosePopupUpdate = () => {
         const popupElement = popupRef.current;
@@ -146,12 +192,14 @@ function UsersItem({ isAdd = false }) {
                                                         className={cx('update-image')}
                                                         src={userUpdate.avatar}
                                                         alt=""
-                                                        id="avatar"
+                                                        id="display-avatar"
                                                     />
                                                 </div>
                                                 <input
                                                     type="file"
+                                                    id="avatar"
                                                     className={cx('upload-avatars')}
+                                                    onChange={handleDisplayImage}
                                                     accept="image/png , image/jpeg"
                                                 />
                                             </div>
@@ -180,11 +228,11 @@ function UsersItem({ isAdd = false }) {
                                                     spellCheck={false}
                                                     defaultValue={userUpdate.address}
                                                 />
-                                                <label htmlFor="position">Position User</label>
+                                                <label htmlFor="department">Position User</label>
                                                 <input
                                                     type="text"
                                                     className={cx('upload-position')}
-                                                    id="position"
+                                                    id="department"
                                                     spellCheck={false}
                                                     defaultValue={userUpdate.department}
                                                 />
@@ -198,7 +246,11 @@ function UsersItem({ isAdd = false }) {
                                                 />
                                             </div>
                                         </div>
-                                        <Buttons primary className={cx('confirm-btn')}>
+                                        <Buttons
+                                            primary
+                                            className={cx('confirm-btn')}
+                                            onClick={() => handleUpdateUser(userUpdate.id)}
+                                        >
                                             <FontAwesomeIcon icon={faPenToSquare} className={cx('icon-update')} />
                                         </Buttons>
                                     </div>
