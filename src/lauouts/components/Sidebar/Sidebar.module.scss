@@ -2,4 +2,7 @@
     width: var(--default-layout-sidebar-width);
     background-color: #2c3e50;
     padding: 20px 0;
+    position: fixed;
+    z-index: 2;
+    height: 100%;
 }

@@ -4,8 +4,9 @@
     }
 }
 .user-item {
+    overflow: hidden;
     text-align: center;
-    min-height: 200px;
+    min-height: 180px;
     min-width: 200px;
     background-color: #ecf0f1;
     padding: 0 8px;
@@ -17,6 +18,13 @@
     }
     &:hover .avatar {
         animation: rotateImage 1s linear;
+    }
+    &:hover .button {
+        transform: translateY(-20px);
+        opacity: 1;
+    }
+    &:hover .address {
+        opacity: 0;
     }
 }
 
@@ -42,7 +50,7 @@
 
 .name {
     color: #000;
-    line-height: 2.5rem;
+    line-height: 2.2rem;
     padding: 8px 0;
     border-bottom: 2px solid #000;
 }
@@ -51,28 +59,32 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    font-weight: 700;
-    font-size: 2rem;
-    line-height: 2.5rem;
+    font-weight: 500;
+    font-size: 1.8rem;
+    line-height: 2.2rem;
     padding: 8px 0;
 }
 
 .phone {
     font-size: 1.8rem;
     line-height: 2.2rem;
-    padding: 4px 0;
+    padding-top: 8px;
 }
 
 .address {
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 1.8rem;
-    line-height: 2.2rem;
+    font-size: 1.6rem;
+    line-height: 2rem;
     padding: 2px 0;
+    transition: all 0.4s linear;
 }
 .button {
     margin-top: -4px;
+    transform: translateY(40px);
+    opacity: 0;
+    transition: all 0.4s linear;
 }
 .delete-btn {
     cursor: pointer;
