@@ -1,25 +1,25 @@
 import classNames from 'classnames/bind';
+import PropTypes from 'prop-types';
 
 import styles from './UserItemPreview.module.scss';
 import Images from '~/components/Images';
 
 const cx = classNames.bind(styles);
-function UserItemPreview() {
+function UserItemPreview({ data = [] }) {
     return (
         <div className={cx('wrapper')}>
             <div className={cx('avatar')}>
-                <Images
-                    className={cx('avatar-image')}
-                    src="https://p16-sign-va.tiktokcdn.com/tos-useast2a-avt-0068-giso/f75993e97bd5424690cb3c702fc88b0d~c5_100x100.jpeg?x-expires=1661443200&x-signature=bqtJOzItwZqttmPCAcfusl7IxCM%3D"
-                    alt=""
-                />
+                <Images className={cx('avatar-image')} src={data.avatar} alt={data.name} />
             </div>
             <div className={cx('information')}>
-                <p className={cx('name')}>Ngô Văn Giang</p>
-                <p className={cx('department')}>Development IT</p>
+                <p className={cx('name')}>{data.name}</p>
+                <p className={cx('department')}>{data.department}</p>
             </div>
         </div>
     );
 }
+UserItemPreview.propTypes = {
+    data: PropTypes.object.isRequired,
+};
 
 export default UserItemPreview;

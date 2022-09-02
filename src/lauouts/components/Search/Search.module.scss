@@ -2,6 +2,7 @@
     width: 280px;
     height: 32px;
     display: flex;
+    position: relative;
     border-bottom: 1px solid #ccc;
     input {
         font-size: 1.6rem;
@@ -28,6 +29,26 @@
         color: var(--primary-color);
     }
 }
+.result-search {
+    width: 254px;
+}
 .result-title {
     margin-left: 4px;
+}
+.loading {
+    position: absolute;
+    right: 4px;
+    top: 58%;
+    transform: translateY(-50%);
+    color: #fff;
+    animation: spinner 0.8s linear infinite;
+}
+
+@keyframes spinner {
+    from {
+        transform: translateY(-50%) rotate(0);
+    }
+    to {
+        transform: translateY(-50%) rotate(360deg);
+    }
 }

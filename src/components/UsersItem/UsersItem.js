@@ -23,7 +23,6 @@ const UPDATE_ACTION = 'update';
 
 //Reducer
 const reducer = (state, action) => {
-    console.log('reducer running...');
     switch (action) {
         case ADD_ACTION:
             return !state;
