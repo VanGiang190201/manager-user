@@ -1,13 +1,14 @@
 import classNames from 'classnames/bind';
 import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
 
 import styles from './UserItemPreview.module.scss';
 import Images from '~/components/Images';
 
 const cx = classNames.bind(styles);
-function UserItemPreview({ data = [] }) {
+function UserItemPreview({ data = {} }) {
     return (
-        <div className={cx('wrapper')}>
+        <Link to={`@${data.name}`} className={cx('wrapper')}>
             <div className={cx('avatar')}>
                 <Images className={cx('avatar-image')} src={data.avatar} alt={data.name} />
             </div>
@@ -15,7 +16,7 @@ function UserItemPreview({ data = [] }) {
                 <p className={cx('name')}>{data.name}</p>
                 <p className={cx('department')}>{data.department}</p>
             </div>
-        </div>
+        </Link>
     );
 }
 UserItemPreview.propTypes = {
