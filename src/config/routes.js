@@ -1,6 +1,6 @@
 const routes = {
     humanManager: '/',
     departmentManager: '/department',
-    profile: '/@:name',
+    profile: '/id=:id',
 };
 export default routes;

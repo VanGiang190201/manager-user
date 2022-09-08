@@ -8,7 +8,7 @@ import Images from '~/components/Images';
 const cx = classNames.bind(styles);
 function UserItemPreview({ data = {} }) {
     return (
-        <Link to={`@${data.name}`} className={cx('wrapper')}>
+        <Link to={`/id=${data.id}`} className={cx('wrapper')}>
             <div className={cx('avatar')}>
                 <Images className={cx('avatar-image')} src={data.avatar} alt={data.name} />
             </div>
