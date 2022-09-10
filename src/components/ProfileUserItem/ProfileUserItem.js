@@ -6,11 +6,24 @@ import { faBookOpen, faBoxArchive, faCircle, faCube, faStar } from '@fortawesome
 
 import styles from './ProfileUserItem.module.scss';
 import Image from '~/components/Images';
+import LineChart from '~/components/LineChart';
 
 const cx = classNames.bind(styles);
 function ProfileUserItem({ id }) {
-    const [userInformation, setUserInformation] = useState([]);
-    console.log(userInformation);
+    const [userInformation, setUserInformation] = useState({});
+
+    // Active tab
+    const tabs = document.querySelectorAll(`.${cx('tab-item')}`);
+
+    tabs.forEach((tab) => {
+        tab.addEventListener('click', () => {
+            const activeTab = document.querySelector(`.${cx('tab-item')}.${cx('active')}`);
+            if (activeTab) {
+                activeTab.classList.remove(`${cx('active')}`);
+            }
+            tab.classList.add(`${cx('active')}`);
+        });
+    });
 
     useEffect(() => {
         fetch(`http://localhost:3000/users/${id}`)
@@ -22,23 +35,23 @@ function ProfileUserItem({ id }) {
         <div className={cx('wrapper')}>
             <div className={cx('user-information')}>
                 <div className={cx('avatar')}>
-                    <Image
-                        className={cx('avatar-image')}
-                        src="https://p16-sign-sg.tiktokcdn.com/aweme/100x100/tiktok-obj/1663152791024641.jpeg?x-expires=1662908400&x-signature=1j5WbW3UoDHB8Zps%2FOGK10jsvUs%3D"
-                        alt=""
-                    />
+                    <Image className={cx('avatar-image')} src={userInformation.avatar} alt="" />
                 </div>
                 <div className={cx('information')}>
-                    <h2 className={cx('name')}>My name is Ngô Văn Giang</h2>
-                    <p className={cx('age')}> I'm 21 years old</p>
-                    <p className={cx('address')}>My home town is Thanh Hóa province !!! </p>
-                    <p className={cx('department')}>Now, I'm work as a Front-End Developer</p>
-                    <p className={cx('phone')}>Contact me, Please call 0868351902 ###</p>
+                    <h2 className={cx('name')}>{`My name is ${userInformation.name}`}</h2>
+                    <p className={cx('age')}>{`I'm ${userInformation.age} years old`}</p>
+                    <p className={cx('address')}>{`My home town is ${userInformation.address} province !!! `}</p>
+                    <p className={cx('department')}>{`Now, I'm work as a ${userInformation.department}`}</p>
+                    <p className={cx('phone')}>{`Contact me, Please call ${userInformation.phone} ###`}</p>
                 </div>
             </div>
             <div className={cx('user-blog')}>
                 <header className={cx('header')}>
-                    <div className={cx('tab-item')}>
+                    <div
+                        className={cx('tab-item', {
+                            active: 'active',
+                        })}
+                    >
                         <FontAwesomeIcon icon={faBookOpen} className={cx('icon-item')} />
                         Overview
                     </div>
@@ -102,6 +115,10 @@ function ProfileUserItem({ id }) {
                                 20,0k
                             </p>
                         </div>
+                    </div>
+                    <p className={cx('repositories-active')}>Actives in the last year</p>
+                    <div className={cx('line-chart')}>
+                        <LineChart />
                     </div>
                 </section>
             </div>
