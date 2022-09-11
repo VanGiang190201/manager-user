@@ -71,50 +71,21 @@ function ProfileUserItem({ id }) {
                 <section className={cx('section')}>
                     <p className={cx('repositories-title')}>Popular Repositories</p>
                     <div className={cx('popular-repositories')}>
-                        <div className={cx('repositories-item')}>
-                            <p className={cx('repositories-name')}>Manager User</p>
-                            <p className={cx('repositories-type')}>
-                                <FontAwesomeIcon icon={faCircle} className={cx('icon-repositories-type')} />
-                                JavaScript
-                            </p>
-                            <p className={cx('repositories-star')}>
-                                <FontAwesomeIcon icon={faStar} />
-                                20,0k
-                            </p>
-                        </div>
-                        <div className={cx('repositories-item')}>
-                            <p className={cx('repositories-name')}>Manager User</p>
-                            <p className={cx('repositories-type')}>
-                                <FontAwesomeIcon icon={faCircle} className={cx('icon-repositories-type')} />
-                                JavaScript
-                            </p>
-                            <p className={cx('repositories-star')}>
-                                <FontAwesomeIcon icon={faStar} />
-                                20,0k
-                            </p>
-                        </div>
-                        <div className={cx('repositories-item')}>
-                            <p className={cx('repositories-name')}>Manager User</p>
-                            <p className={cx('repositories-type')}>
-                                <FontAwesomeIcon icon={faCircle} className={cx('icon-repositories-type')} />
-                                JavaScript
-                            </p>
-                            <p className={cx('repositories-star')}>
-                                <FontAwesomeIcon icon={faStar} />
-                                20,0k
-                            </p>
-                        </div>
-                        <div className={cx('repositories-item')}>
-                            <p className={cx('repositories-name')}>Manager User</p>
-                            <p className={cx('repositories-type')}>
-                                <FontAwesomeIcon icon={faCircle} className={cx('icon-repositories-type')} />
-                                JavaScript
-                            </p>
-                            <p className={cx('repositories-star')}>
-                                <FontAwesomeIcon icon={faStar} />
-                                20,0k
-                            </p>
-                        </div>
+                        {userInformation.repositories
+                            ? userInformation.repositories.map((repository, index) => (
+                                  <div className={cx('repositories-item')} key={index}>
+                                      <p className={cx('repositories-name')}>{repository.repositories_name}</p>
+                                      <p className={cx('repositories-type')}>
+                                          <FontAwesomeIcon icon={faCircle} className={cx('icon-repositories-type')} />
+                                          {repository.repositories_type}
+                                      </p>
+                                      <p className={cx('repositories-star')}>
+                                          <FontAwesomeIcon icon={faStar} />
+                                          {repository.repositories_star}
+                                      </p>
+                                  </div>
+                              ))
+                            : 'No Repositories'}
                     </div>
                     <p className={cx('repositories-active')}>Actives in the last year</p>
                     <div className={cx('line-chart')}>

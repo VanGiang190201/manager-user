@@ -1,14 +1,15 @@
 import classNames from 'classnames/bind';
 import { useState, useEffect, useReducer, useRef } from 'react';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faPenToSquare, faTrashCan } from '@fortawesome/free-regular-svg-icons';
+import { faXmark } from '@fortawesome/free-solid-svg-icons';
+import Tippy from '@tippyjs/react';
 
 import styles from './UsersItem.module.scss';
 import Images from '~/components/Images';
 import Buttons from '~/components/Buttons';
 import { HomeIcon, UserGroupIcon } from '~/components/Icons';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faPenToSquare, faTrashCan } from '@fortawesome/free-regular-svg-icons';
 import Popup from '~/components/Popup';
-import { faXmark } from '@fortawesome/free-solid-svg-icons';
 
 const cx = classNames.bind(styles);
 
@@ -42,6 +43,8 @@ function UsersItem({ isAdd = false }) {
     const [userUpdates, setUserUpdates] = useState([]);
     const [dataChange, dispatch] = useReducer(reducer, initState);
 
+    const item = document.querySelectorAll(`.${cx('wrapper')}`);
+    console.log(item);
     //render list user
     useEffect(() => {
         fetch(`http://localhost:3000/users`)
@@ -72,6 +75,7 @@ function UsersItem({ isAdd = false }) {
     const handleDisplayImage = () => {
         const preview = document.querySelector('#display-avatar');
         const image = document.querySelector('input[type="file"]').files[0];
+
         const reader = new FileReader();
         reader.addEventListener(
             'load',
@@ -140,37 +144,43 @@ function UsersItem({ isAdd = false }) {
             {renderUsers.map((user) => {
                 return (
                     <div className={cx('wrapper')} key={user.id}>
-                        <div className={cx('user-item')}>
-                            <div id="cover"></div>
-                            <p className={cx('position')}>
-                                <UserGroupIcon />
-                                <strong>{user.department}</strong>
-                            </p>
-                            <div className={cx('avatar')}>
-                                <Images className={cx('avatar-image')} src={user.avatar} alt={user.name} />
-                            </div>
-                            <div className={cx('information')}>
-                                <h3 className={cx('name')}>{user.name}</h3>
-
-                                <p className={cx('phone')}>{user.phone}</p>
-                                <p className={cx('address')}>
-                                    <HomeIcon />
-                                    <span>{user.address}</span>
+                        <Tippy delay={[0, 400]}>
+                            <div className={cx('user-item')}>
+                                <div id="cover"></div>
+                                <p className={cx('position')}>
+                                    <UserGroupIcon />
+                                    <strong>{user.department}</strong>
                                 </p>
+                                <div className={cx('avatar')}>
+                                    <Images className={cx('avatar-image')} src={user.avatar} alt={user.name} />
+                                </div>
+                                <div className={cx('information')}>
+                                    <h3 className={cx('name')}>{user.name}</h3>
+
+                                    <p className={cx('phone')}>{user.phone}</p>
+                                    <p className={cx('address')}>
+                                        <HomeIcon />
+                                        <span>{user.address}</span>
+                                    </p>
+                                </div>
+                                <div className={cx('button')}>
+                                    <Buttons
+                                        outline
+                                        className={cx('delete-btn')}
+                                        onClick={() => handleDeleteUser(user.id)}
+                                    >
+                                        <FontAwesomeIcon icon={faTrashCan} />
+                                    </Buttons>
+                                    <Buttons
+                                        outline
+                                        className={cx('update-btn')}
+                                        onClick={() => handleShowPopupUpdate(user.id)}
+                                    >
+                                        <FontAwesomeIcon icon={faPenToSquare} />
+                                    </Buttons>
+                                </div>
                             </div>
-                            <div className={cx('button')}>
-                                <Buttons outline className={cx('delete-btn')} onClick={() => handleDeleteUser(user.id)}>
-                                    <FontAwesomeIcon icon={faTrashCan} />
-                                </Buttons>
-                                <Buttons
-                                    outline
-                                    className={cx('update-btn')}
-                                    onClick={() => handleShowPopupUpdate(user.id)}
-                                >
-                                    <FontAwesomeIcon icon={faPenToSquare} />
-                                </Buttons>
-                            </div>
-                        </div>
+                        </Tippy>
                         <Popup ref={popupRef}>
                             {userUpdates.map((userUpdate) => {
                                 return (
