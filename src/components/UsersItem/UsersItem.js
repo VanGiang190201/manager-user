@@ -3,7 +3,7 @@ import { useState, useEffect, useReducer, useRef } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPenToSquare, faTrashCan } from '@fortawesome/free-regular-svg-icons';
 import { faXmark } from '@fortawesome/free-solid-svg-icons';
-import Tippy from '@tippyjs/react';
+import { useNavigate } from 'react-router-dom';
 
 import styles from './UsersItem.module.scss';
 import Images from '~/components/Images';
@@ -39,12 +39,12 @@ const reducer = (state, action) => {
 function UsersItem({ isAdd = false }) {
     const popupRef = useRef();
     const userAvatar = useRef();
+
+    const navigate = useNavigate();
     const [renderUsers, setRenderUsers] = useState([]);
     const [userUpdates, setUserUpdates] = useState([]);
     const [dataChange, dispatch] = useReducer(reducer, initState);
 
-    const item = document.querySelectorAll(`.${cx('wrapper')}`);
-    console.log(item);
     //render list user
     useEffect(() => {
         fetch(`http://localhost:3000/users`)
@@ -94,6 +94,11 @@ function UsersItem({ isAdd = false }) {
         const cover = document.querySelector('#cover');
         const popupClass = cx('popup');
         const coverClass = cx('cover');
+        const noneEventClass = cx('event-none');
+        const wrapper = document.querySelectorAll(`.${cx('wrapper')}`);
+        Array.from(wrapper).forEach((item) => {
+            item.classList.add(noneEventClass);
+        });
         popupElement.classList.add(popupClass);
         cover.classList.add(coverClass);
         //At the same time, handle user with id
@@ -123,7 +128,10 @@ function UsersItem({ isAdd = false }) {
 
         fetch(`http://localhost:3000/users/${id}`, option)
             .then((response) => response.json())
-            .then(() => dispatch(UPDATE_ACTION))
+            .then(() => {
+                dispatch(UPDATE_ACTION);
+                handleClosePopupUpdate();
+            })
             .catch((error) => console.log(error));
     };
     const handleClosePopupUpdate = () => {
@@ -144,43 +152,44 @@ function UsersItem({ isAdd = false }) {
             {renderUsers.map((user) => {
                 return (
                     <div className={cx('wrapper')} key={user.id}>
-                        <Tippy delay={[0, 400]}>
-                            <div className={cx('user-item')}>
-                                <div id="cover"></div>
-                                <p className={cx('position')}>
-                                    <UserGroupIcon />
-                                    <strong>{user.department}</strong>
-                                </p>
-                                <div className={cx('avatar')}>
-                                    <Images className={cx('avatar-image')} src={user.avatar} alt={user.name} />
-                                </div>
-                                <div className={cx('information')}>
-                                    <h3 className={cx('name')}>{user.name}</h3>
-
-                                    <p className={cx('phone')}>{user.phone}</p>
-                                    <p className={cx('address')}>
-                                        <HomeIcon />
-                                        <span>{user.address}</span>
-                                    </p>
-                                </div>
-                                <div className={cx('button')}>
-                                    <Buttons
-                                        outline
-                                        className={cx('delete-btn')}
-                                        onClick={() => handleDeleteUser(user.id)}
-                                    >
-                                        <FontAwesomeIcon icon={faTrashCan} />
-                                    </Buttons>
-                                    <Buttons
-                                        outline
-                                        className={cx('update-btn')}
-                                        onClick={() => handleShowPopupUpdate(user.id)}
-                                    >
-                                        <FontAwesomeIcon icon={faPenToSquare} />
-                                    </Buttons>
-                                </div>
+                        <div
+                            className={cx('user-item')}
+                            onClick={() =>
+                                setTimeout(() => {
+                                    navigate(`id=${user.id}`);
+                                }, 500)
+                            }
+                        >
+                            <div id="cover"></div>
+                            <p className={cx('position')}>
+                                <UserGroupIcon />
+                                <strong>{user.department}</strong>
+                            </p>
+                            <div className={cx('avatar')}>
+                                <Images className={cx('avatar-image')} src={user.avatar} alt={user.name} />
                             </div>
-                        </Tippy>
+                            <div className={cx('information')}>
+                                <h3 className={cx('name')}>{user.name}</h3>
+
+                                <p className={cx('phone')}>{user.phone}</p>
+                                <p className={cx('address')}>
+                                    <HomeIcon />
+                                    <span>{user.address}</span>
+                                </p>
+                            </div>
+                            <div className={cx('button')}>
+                                <Buttons outline className={cx('delete-btn')} onClick={() => handleDeleteUser(user.id)}>
+                                    <FontAwesomeIcon icon={faTrashCan} />
+                                </Buttons>
+                                <Buttons
+                                    outline
+                                    className={cx('update-btn')}
+                                    onClick={() => handleShowPopupUpdate(user.id)}
+                                >
+                                    <FontAwesomeIcon icon={faPenToSquare} />
+                                </Buttons>
+                            </div>
+                        </div>
                         <Popup ref={popupRef}>
                             {userUpdates.map((userUpdate) => {
                                 return (

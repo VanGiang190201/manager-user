@@ -6,6 +6,10 @@
         display: block;
     }
 }
+.wrapper.event-none {
+    pointer-events: none;
+}
+
 .user-item {
     overflow: hidden;
     text-align: center;
