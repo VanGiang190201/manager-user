@@ -6,10 +6,12 @@
         display: block;
     }
 }
-.wrapper.event-none {
-    pointer-events: none;
+.btn-profile {
+    cursor: pointer;
+    &:hover {
+        background-color: #ccc !important;
+    }
 }
-
 .user-item {
     overflow: hidden;
     text-align: center;
